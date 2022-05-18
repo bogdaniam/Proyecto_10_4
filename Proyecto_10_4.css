@@ -2,6 +2,7 @@
     display:grid;
     grid-template-columns: 100px 100px 100px 100px 100px;
     grid-template-rows: 100px 100px 100px 100px;
+    width: 50%
 }
 
 #padre div  {
@@ -26,6 +27,8 @@ img {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
+    width: 50%
 }
 
 #nuevoPerro{
@@ -33,4 +36,14 @@ img {
     min-height: 200px;
     max-width: 200px;
     max-height: 200px;
+    border: solid 5px black;
+}
+
+#header {
+    display: flex;
+    justify-content: center;
+}
+
+p {
+    
 }
