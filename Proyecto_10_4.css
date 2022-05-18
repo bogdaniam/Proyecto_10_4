@@ -1,0 +1,36 @@
+#padre {
+    display:grid;
+    grid-template-columns: 100px 100px 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px 100px;
+}
+
+#padre div  {
+    border: solid 1px black;
+}
+
+img {
+    min-width: 99px;
+    min-height: 99px;
+    max-width: 99px;
+    max-height: 99px;
+    
+
+}
+
+#general {
+    display: flex;
+    justify-content: space-around;
+}
+
+#fichaje{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#nuevoPerro{
+    min-width: 200px;
+    min-height: 200px;
+    max-width: 200px;
+    max-height: 200px;
+}
