@@ -18,7 +18,8 @@ function generar() {
             document.getElementById(`nuevoPerro`).src = "https://1478500360.rsc.cdn77.org/app/00000001/1888/a5f164bb6f42c8b99b34ec41a2109cca9814e761_1607449794.gif"
             document.getElementById("mensaje").innerText = "Gotta Catch 'Em All!"
         }
-        setTimeout(changeSurprize, 3000);
+        setTimeout(changeSurprize, 2000);
+        document.getElementById("restante").innerText = `Te quedan para descubrit ${20 - contador} Firulais`
 
 
 

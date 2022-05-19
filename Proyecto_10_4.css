@@ -2,7 +2,8 @@
     display:grid;
     grid-template-columns: 100px 100px 100px 100px 100px;
     grid-template-rows: 100px 100px 100px 100px;
-    width: 50%
+    width: 50%;
+    
 }
 
 #padre div  {
@@ -10,10 +11,10 @@
 }
 
 img {
-    min-width: 99px;
-    min-height: 99px;
-    max-width: 99px;
-    max-height: 99px;
+    min-width: 98px;
+    min-height: 98px;
+    max-width: 98px;
+    max-height: 98px;
     
 
 }
