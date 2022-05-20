@@ -45,11 +45,13 @@ function generar() {
         //separamos el enlace, para luego luego saber cual es la raza
         var enlaceSeparado = (a.message.split('/'));
 
-
+        //declaramos una variable, y la ponemos a false
         let encontrado = false;
         let key;
+        //vamos a recorrer el locar storage, y mirar en cada key si tenemos ya la raza
         for (let i = 0; i <= localStorage.length; i++) {
             key = localStorage.key(i);
+            //comprobacion del key con la nueva raza, si existe, vamos a guardar la cantidad de dicha raza, le sumamos uno y vamos a cambiar su valor en local storage
             if (key == enlaceSeparado[4]) {
                 let cantNum = Number(JSON.parse(localStorage.getItem(`${key}`)).cantidad)
             cantNum++;
@@ -60,14 +62,12 @@ function generar() {
                 encontrado = true;
             }
         }
+        //si la raza todavia no existe en local storage, vamos a crear una nueva key y ponemos la cantidad al final
         if (!encontrado) {
             localStorage.setItem(enlaceSeparado[4], JSON.stringify({
                 cantidad: 1,
             }));
         }
-
-
-        //comprobar antes del push
 
 
         //vamos guardando las razas en la variable
