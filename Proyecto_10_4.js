@@ -38,8 +38,8 @@ function generar() {
         }
 
         //despues de poner en pantalla el nuevo perro, le damos 2 segundo y vamos a poner el gif y el texto por defecto
-        setTimeout(changeSurprize, 2000);
-        setTimeout(cuadroConRertraso, 2000);
+        setTimeout(changeSurprize, 1000);
+        setTimeout(cuadroConRertraso, 1000);
         document.getElementById("restante").innerText = `Te quedan para descubrit ${20 - contador} Firulais`
 
 
@@ -70,84 +70,78 @@ function generar() {
             }));
         }
 
-        //vamos guardando las razas en la variable
-        //razas.push(enlaceSeparado[4])
-        //console.log(razas);
+        //para poner el nombre bien en html
+        let myArraySplit1 = enlaceSeparado[4].split("-");
+        let myArraySplitUnido1 = "";
+        for (let j = 0; j < myArraySplit1.length; j++) {
+            myArraySplitUnido1 += `${myArraySplit1[j][0].toUpperCase()}${myArraySplit1[j].substring(1)} `
+
+        }
 
         //cambiamos el texto del html
-        document.getElementById("mensaje").innerText = `Acabas de descubrir un... ${enlaceSeparado[4]}`
+        document.getElementById("mensaje").innerText = `Acabas de descubrir un... ${myArraySplitUnido1}`
         //console.log(enlaceSeparado)
 
         //añadir las razas y cantidad en array cuando se descubren los 20 perros
         if (contador == 2) {
 
-            //Se recorre el local storage
-            for (let i = 0; i < localStorage.length; i++) {
+            setTimeout(cambiarGrafica, 2000);
 
-               //Se guarda cada raza en la variabñe key
-               key = localStorage.key(i);
+            function cambiarGrafica() {
+                //document.getElementById("fotoBot").style.display = "none"
+                document.getElementById("padre").style.display = "none"
+                document.getElementById("fichaje").style.display = "none"
+                document.getElementById("grafica").style.display = "contents"
 
-               //Se crea un nuevo array por si acaso el nombre de la raza es compuesto y separado por -
-               let myArraySplit = key.split("-");
-               let myArraySplitUnido = "";
 
-               //poner if
+                //Se recorre el local storage
+                for (let i = 0; i < localStorage.length; i++) {
 
-               //recorremos cada palabra del nombre de la raza, ponemos a uppercase la primeraletra y añadimos el resto de la palabra
-               for(let j = 0; j < myArraySplit.length; j++) {
-                  myArraySplitUnido += `${myArraySplit[j][0].toUpperCase()}${myArraySplit[j].substring(1)} `
-                  //console.log(myArraySplit[j][0].toUpperCase() + myArraySplit[j].substring(1))
-               }
-               //console.log(myArraySplitUnido)
-   
+                    //Se guarda cada raza en la variabñe key
+                    key = localStorage.key(i);
 
-               //Se añade a los datos de los perros a la grafica
-               razasFinal.push(myArraySplitUnido)
-               razasCantidad.push(JSON.parse(localStorage.getItem(`${key}`)).cantidad)
+                    //Se crea un nuevo array por si acaso el nombre de la raza es compuesto y separado por -
+                    let myArraySplit = key.split("-");
+                    let myArraySplitUnido = "";
+
+
+                    //recorremos cada palabra del nombre de la raza, ponemos a uppercase la primeraletra y añadimos el resto de la palabra
+                    for (let j = 0; j < myArraySplit.length; j++) {
+                        myArraySplitUnido += `${myArraySplit[j][0].toUpperCase()}${myArraySplit[j].substring(1)} `
+
+                    }
+                    //console.log(myArraySplitUnido)
+                    //Se añade a los datos de los perros a la grafica
+                    razasFinal.push(myArraySplitUnido)
+                    razasCantidad.push(JSON.parse(localStorage.getItem(`${key}`)).cantidad)
+                }
+
+
+                //para la grafica
+                const labels = razasFinal;
+
+                const data = {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Estatistica Perros',
+                        backgroundColor: 'rgb(255, 99, 132)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: razasCantidad,
+                    }]
+                };
+
+                const config = {
+                    type: 'bar',
+                    data: data,
+                    options: {}
+                };
+
+                const myChart = new Chart(
+                    document.getElementById('myChart'),
+                    config
+                );
             }
-   
-   
-            //para la grafica
-            const labels = razasFinal;
-   
-            const data = {
-               labels: labels,
-               datasets: [{
-                  label: 'My First dataset',
-                  backgroundColor: 'rgb(255, 99, 132)',
-                  borderColor: 'rgb(255, 99, 132)',
-                  data: razasCantidad,
-               }]
-            };
-   
-            const config = {
-               type: 'bar',
-               data: data,
-               options: {}
-            };
-   
-            const myChart = new Chart(
-               document.getElementById('myChart'),
-               config
-            );
-   
-            //console.log(myChart)
-            //console.log(labels)
-            //console.log(data)
-   
-   
-   
-   
-   
-   
-         }
-        //console.log(razasFinal)
-        //console.log(razasCantidad)
+        }
     }
-
-
-
-
     contador++;
-
 }
