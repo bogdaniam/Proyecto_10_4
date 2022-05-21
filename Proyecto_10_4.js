@@ -83,7 +83,7 @@ function generar() {
         //console.log(enlaceSeparado)
 
         //añadir las razas y cantidad en array cuando se descubren los 20 perros
-        if (contador == 2) {
+        if (contador == 20) {
 
             setTimeout(cambiarGrafica, 2000);
 
