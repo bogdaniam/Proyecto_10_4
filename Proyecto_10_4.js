@@ -6,7 +6,8 @@ let razas = [];
 
 //
 let razasOrdendas = [];
-
+let razasFinal = [];
+let razasCantidad = [];
 
 function generar() {
 
@@ -54,10 +55,10 @@ function generar() {
             //comprobacion del key con la nueva raza, si existe, vamos a guardar la cantidad de dicha raza, le sumamos uno y vamos a cambiar su valor en local storage
             if (key == enlaceSeparado[4]) {
                 let cantNum = Number(JSON.parse(localStorage.getItem(`${key}`)).cantidad)
-            cantNum++;
-            localStorage.setItem(enlaceSeparado[4], JSON.stringify({
-                cantidad: cantNum,
-            }));
+                cantNum++;
+                localStorage.setItem(enlaceSeparado[4], JSON.stringify({
+                    cantidad: cantNum,
+                }));
                 i = localStorage.length;
                 encontrado = true;
             }
@@ -69,16 +70,82 @@ function generar() {
             }));
         }
 
-
         //vamos guardando las razas en la variable
-        razas.push(enlaceSeparado[4])
-        console.log(razas);
+        //razas.push(enlaceSeparado[4])
+        //console.log(razas);
 
         //cambiamos el texto del html
         document.getElementById("mensaje").innerText = `Acabas de descubrir un... ${enlaceSeparado[4]}`
         //console.log(enlaceSeparado)
 
+        //añadir las razas y cantidad en array cuando se descubren los 20 perros
+        if (contador == 2) {
+
+            //Se recorre el local storage
+            for (let i = 0; i < localStorage.length; i++) {
+
+               //Se guarda cada raza en la variabñe key
+               key = localStorage.key(i);
+
+               //Se crea un nuevo array por si acaso el nombre de la raza es compuesto y separado por -
+               let myArraySplit = key.split("-");
+               let myArraySplitUnido = "";
+
+               //poner if
+
+               //recorremos cada palabra del nombre de la raza, ponemos a uppercase la primeraletra y añadimos el resto de la palabra
+               for(let j = 0; j < myArraySplit.length; j++) {
+                  myArraySplitUnido += `${myArraySplit[j][0].toUpperCase()}${myArraySplit[j].substring(1)} `
+                  //console.log(myArraySplit[j][0].toUpperCase() + myArraySplit[j].substring(1))
+               }
+               //console.log(myArraySplitUnido)
+   
+
+               //Se añade a los datos de los perros a la grafica
+               razasFinal.push(myArraySplitUnido)
+               razasCantidad.push(JSON.parse(localStorage.getItem(`${key}`)).cantidad)
+            }
+   
+   
+            //para la grafica
+            const labels = razasFinal;
+   
+            const data = {
+               labels: labels,
+               datasets: [{
+                  label: 'My First dataset',
+                  backgroundColor: 'rgb(255, 99, 132)',
+                  borderColor: 'rgb(255, 99, 132)',
+                  data: razasCantidad,
+               }]
+            };
+   
+            const config = {
+               type: 'bar',
+               data: data,
+               options: {}
+            };
+   
+            const myChart = new Chart(
+               document.getElementById('myChart'),
+               config
+            );
+   
+            //console.log(myChart)
+            //console.log(labels)
+            //console.log(data)
+   
+   
+   
+   
+   
+   
+         }
+        //console.log(razasFinal)
+        //console.log(razasCantidad)
     }
+
+
 
 
     contador++;
