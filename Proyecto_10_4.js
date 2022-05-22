@@ -66,7 +66,7 @@ function generar() {
                     cantidad: cantNum,
                 }));
                 encontrado = true;
-                contLocStor = 0
+                
             }
             contLocStor++;
         }
@@ -103,11 +103,12 @@ function generar() {
         document.getElementById("mensaje").innerText = `Acabas de descubrir un... ${nombreBienCompleto}`
         //console.log(enlaceSeparado)
 
+
+
+
         //añadir las razas y cantidad en array cuando se descubren los 20 perros
         if (contador == 20) {
-
             setTimeout(cambiarGrafica, 2000);
-
             function cambiarGrafica() {
                 //document.getElementById("fotoBot").style.display = "none"
                 document.getElementById("padre").style.display = "none"
@@ -120,18 +121,13 @@ function generar() {
 
                     //Se guarda cada raza en la variabñe key
                     //key = localStorage.key(i);
-
-
-                    //console.log(nombreBienCompleto)
                     //Se añade a los datos de los perros a la grafica
                     razasFinal.push(localStorage.key(i))
                     razasCantidad.push(JSON.parse(localStorage.getItem(`${localStorage.key(i)}`)).cantidad)
                 }
 
-
                 //para la grafica
                 const labels = razasFinal;
-
                 const data = {
                     labels: labels,
                     datasets: [{
