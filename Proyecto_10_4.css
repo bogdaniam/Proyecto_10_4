@@ -5,16 +5,14 @@
     grid-template-columns: 100px 100px 100px 100px 100px;
     grid-template-rows: 100px 100px 100px 100px;
     width: 50%;
-    margin: 0; 
-    padding: 0;
+
     
 }
 
 #padre div {
     border: solid 1px black;
     background-color: black;
-    margin: 0; 
-    padding: 0;
+
 }
 
 img {
@@ -22,8 +20,6 @@ img {
     min-height: 98px;
     max-width: 98px;
     max-height: 98px;
-    margin: 0; 
-    padding: 0;
     
 }
 
@@ -90,3 +86,4 @@ button:hover {
     background-color: rgb(255, 0, 136);
     transition: 500ms;
   }
+
