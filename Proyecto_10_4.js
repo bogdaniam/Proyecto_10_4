@@ -2,10 +2,8 @@
 let contador = 0;
 
 //se guardan todas la razas, de todas las imagenes
-let razas = [];
 
-//
-let razasOrdendas = [];
+//let razasOrdendas = [];
 let razasFinal = [];
 let razasCantidad = [];
 
@@ -16,16 +14,23 @@ function generar() {
     fetch(`https://dog.ceo/api/breeds/image/random `)
         .then(res => res.json())
         //una vez creado el json, vamos a llamar la funcion prueba con el parametro json
-        .then(json => prueba(json))//
+        .then(json => duendes(json))//
 
 
-    function prueba(a) {
+    function duendes(a) {
+        //document.getElementById("button").onclick.value = "#"
+        document.getElementById("button").setAttribute('onclick','#');
+        document.getElementById("button").style.backgroundColor = "red";
+        
+
+
         function cuadroConRertraso() {
-            //para colocar la imagen en cu cuadraito
-            //para poner el gif y el texto por defecto
+            //para colocar la imagen en cu cuadraito y para poner el gif y el texto por defecto
             document.getElementById(`hijo${contador}`).src = `${a.message}`
             document.getElementById(`nuevoPerro`).src = "https://1478500360.rsc.cdn77.org/app/00000001/1888/a5f164bb6f42c8b99b34ec41a2109cca9814e761_1607449794.gif"
             document.getElementById("mensaje").innerText = "Gotta Catch 'Em All!"
+            document.getElementById("button").setAttribute('onclick','generar();')
+            document.getElementById("button").style.backgroundColor = "lime";
         }
 
 
@@ -34,13 +39,14 @@ function generar() {
 
         
         //despues de poner en pantalla el nuevo perro, le damos 1 segundo y vamos a poner el gif y el texto por defecto
-        setTimeout(cuadroConRertraso, 1000);
+        setTimeout(cuadroConRertraso, 1200);
         document.getElementById("restante").innerText = `Te quedan para descubrit ${20 - contador} Firulais`
+
 
 
         //separamos el enlace, para luego saber cual es la raza
         var enlaceSeparado = (a.message.split('/'));
-
+        
         //declaramos una variable, y la ponemos a false
         let encontrado = false;
         let key;
@@ -58,7 +64,7 @@ function generar() {
         while((contLocStor != localStorage.length) && (encontrado != true)) {
             key = localStorage.key(contLocStor);
             //comprobacion del key con la nueva raza, si existe, vamos a guardar la cantidad de dicha raza, le sumamos uno y vamos a cambiar su valor en local storage
-            console.log(localStorage.length)
+            
             if (key == nombreBienCompleto) {
                 let cantNum = Number(JSON.parse(localStorage.getItem(`${key}`)).cantidad)
                 cantNum++;
@@ -101,7 +107,7 @@ function generar() {
 
         //cambiamos el texto del html
         document.getElementById("mensaje").innerText = `Acabas de descubrir un... ${nombreBienCompleto}`
-        //console.log(enlaceSeparado)
+        
 
 
 
