@@ -44,16 +44,35 @@ function generar() {
         //declaramos una variable, y la ponemos a false
         let encontrado = false;
         let key;
+        let contLocStor = 0;
 
         //para poner el nombre bien
         let nombreSplit = enlaceSeparado[4].split("-");
         let nombreBienCompleto = "";
         for (let j = 0; j < nombreSplit.length; j++) {
             nombreBienCompleto += `${nombreSplit[j][0].toUpperCase()}${nombreSplit[j].substring(1)} `
-
         }
 
         
+        //vamos a recorrer el locar storage, y mirar en cada key si tenemos ya la raza
+        while((contLocStor != localStorage.length) && (encontrado != true)) {
+            key = localStorage.key(contLocStor);
+            //comprobacion del key con la nueva raza, si existe, vamos a guardar la cantidad de dicha raza, le sumamos uno y vamos a cambiar su valor en local storage
+            console.log(localStorage.length)
+            if (key == nombreBienCompleto) {
+                let cantNum = Number(JSON.parse(localStorage.getItem(`${key}`)).cantidad)
+                cantNum++;
+                localStorage.setItem(nombreBienCompleto, JSON.stringify({
+                    cantidad: cantNum,
+                }));
+                encontrado = true;
+                contLocStor = 0
+            }
+            contLocStor++;
+        }
+
+
+        /*
         //vamos a recorrer el locar storage, y mirar en cada key si tenemos ya la raza
         for (let i = 0; i <= localStorage.length; i++) {
             key = localStorage.key(i);
@@ -68,7 +87,7 @@ function generar() {
                 encontrado = true;
             }
         }
-       
+        */
 
         //si la raza todavia no existe en local storage, vamos a crear una nueva key y ponemos la cantidad al final
         if (!encontrado) {
