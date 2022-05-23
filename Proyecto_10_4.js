@@ -1,7 +1,6 @@
 //nos sirve a la hora de colocar las fotos
 let contador = 0;
 
-//se guardan todas la razas, de todas las imagenes
 
 //let razasOrdendas = [];
 let razasFinal = [];
@@ -10,7 +9,7 @@ let razasCantidad = [];
 function generar() {
 
     //utilizamos la api para generar imagenes
-    //let name = document.getElementById("gitgit").value
+
     fetch(`https://dog.ceo/api/breeds/image/random `)
         .then(res => res.json())
         //una vez creado el json, vamos a llamar la funcion prueba con el parametro json
@@ -23,9 +22,8 @@ function generar() {
         document.getElementById("button").style.backgroundColor = "red";
 
 
-
-        function cuadroConRertraso() {
             //para colocar la imagen en cu cuadraito y para poner el gif y el texto por defecto
+        function cuadroConRertraso() {
             document.getElementById(`hijo${contador}`).src = `${a.message}`
             document.getElementById(`nuevoPerro`).src = "https://1478500360.rsc.cdn77.org/app/00000001/1888/a5f164bb6f42c8b99b34ec41a2109cca9814e761_1607449794.gif"
             document.getElementById("mensaje").innerText = "Gotta Catch 'Em All!"
@@ -63,18 +61,15 @@ function generar() {
         //vamos a recorrer el locar storage, y mirar en cada key si tenemos ya la raza
         while ((contLocStor != localStorage.length) && (encontrado != true)) {
             key = localStorage.key(contLocStor);
-            
+
             //comprobacion del key con la nueva raza, si existe, vamos a guardar la cantidad de dicha raza, le sumamos uno y vamos a cambiar su valor en local storage
             if (key == nombreBienCompleto) {
                 let cantNum = Number(JSON.parse(localStorage.getItem(`${key}`)))
-
                 cantNum++;
                 localStorage.setItem(nombreBienCompleto, JSON.stringify(
                     Number(cantNum)
                 ));
-
                 encontrado = true;
-
             }
             contLocStor++;
         }
@@ -87,12 +82,8 @@ function generar() {
         }
 
 
-
-
         //cambiamos el texto del html
         document.getElementById("mensaje").innerText = `Acabas de descubrir un... ${nombreBienCompleto}`
-
-
 
 
 
