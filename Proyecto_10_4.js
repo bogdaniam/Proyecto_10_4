@@ -19,9 +19,9 @@ function generar() {
 
     function duendes(a) {
         //document.getElementById("button").onclick.value = "#"
-        document.getElementById("button").setAttribute('onclick','#');
+        document.getElementById("button").setAttribute('onclick', '#');
         document.getElementById("button").style.backgroundColor = "red";
-        
+
 
 
         function cuadroConRertraso() {
@@ -29,7 +29,7 @@ function generar() {
             document.getElementById(`hijo${contador}`).src = `${a.message}`
             document.getElementById(`nuevoPerro`).src = "https://1478500360.rsc.cdn77.org/app/00000001/1888/a5f164bb6f42c8b99b34ec41a2109cca9814e761_1607449794.gif"
             document.getElementById("mensaje").innerText = "Gotta Catch 'Em All!"
-            document.getElementById("button").setAttribute('onclick','generar();')
+            document.getElementById("button").setAttribute('onclick', 'generar();')
             document.getElementById("button").style.backgroundColor = "lime";
         }
 
@@ -37,7 +37,7 @@ function generar() {
         //vamos a mostrar el nuevo perro encontrado
         document.getElementById(`nuevoPerro`).src = `${a.message}`
 
-        
+
         //despues de poner en pantalla el nuevo perro, le damos 1 segundo y vamos a poner el gif y el texto por defecto
         setTimeout(cuadroConRertraso, 1200);
         document.getElementById("restante").innerText = `Te quedan para descubrit ${20 - contador} Firulais`
@@ -46,7 +46,7 @@ function generar() {
 
         //separamos el enlace, para luego saber cual es la raza
         var enlaceSeparado = (a.message.split('/'));
-        
+
         //declaramos una variable, y la ponemos a false
         let encontrado = false;
         let key;
@@ -59,55 +59,39 @@ function generar() {
             nombreBienCompleto += `${nombreSplit[j][0].toUpperCase()}${nombreSplit[j].substring(1)} `
         }
 
-        
+
         //vamos a recorrer el locar storage, y mirar en cada key si tenemos ya la raza
-        while((contLocStor != localStorage.length) && (encontrado != true)) {
+        while ((contLocStor != localStorage.length) && (encontrado != true)) {
             key = localStorage.key(contLocStor);
-            //comprobacion del key con la nueva raza, si existe, vamos a guardar la cantidad de dicha raza, le sumamos uno y vamos a cambiar su valor en local storage
             
+            //comprobacion del key con la nueva raza, si existe, vamos a guardar la cantidad de dicha raza, le sumamos uno y vamos a cambiar su valor en local storage
             if (key == nombreBienCompleto) {
-                let cantNum = Number(JSON.parse(localStorage.getItem(`${key}`)).cantidad)
+                let cantNum = Number(JSON.parse(localStorage.getItem(`${key}`)))
+
                 cantNum++;
-                localStorage.setItem(nombreBienCompleto, JSON.stringify({
-                    cantidad: cantNum,
-                }));
+                localStorage.setItem(nombreBienCompleto, JSON.stringify(
+                    Number(cantNum)
+                ));
+
                 encontrado = true;
-                
+
             }
             contLocStor++;
         }
 
-
-        /*
-        //vamos a recorrer el locar storage, y mirar en cada key si tenemos ya la raza
-        for (let i = 0; i <= localStorage.length; i++) {
-            key = localStorage.key(i);
-            //comprobacion del key con la nueva raza, si existe, vamos a guardar la cantidad de dicha raza, le sumamos uno y vamos a cambiar su valor en local storage
-            if (key == nombreBienCompleto) {
-                let cantNum = Number(JSON.parse(localStorage.getItem(`${key}`)).cantidad)
-                cantNum++;
-                localStorage.setItem(nombreBienCompleto, JSON.stringify({
-                    cantidad: cantNum,
-                }));
-                i = localStorage.length;
-                encontrado = true;
-            }
-        }
-        */
-
         //si la raza todavia no existe en local storage, vamos a crear una nueva key y ponemos la cantidad al final
         if (!encontrado) {
-            localStorage.setItem(nombreBienCompleto, JSON.stringify({
-                cantidad: 1,
-            }));
+            localStorage.setItem(nombreBienCompleto, JSON.stringify(
+                1
+            ));
         }
-        
 
-        
+
+
 
         //cambiamos el texto del html
         document.getElementById("mensaje").innerText = `Acabas de descubrir un... ${nombreBienCompleto}`
-        
+
 
 
 
@@ -129,7 +113,7 @@ function generar() {
                     //key = localStorage.key(i);
                     //Se añade a los datos de los perros a la grafica
                     razasFinal.push(localStorage.key(i))
-                    razasCantidad.push(JSON.parse(localStorage.getItem(`${localStorage.key(i)}`)).cantidad)
+                    razasCantidad.push(JSON.parse(localStorage.getItem(`${localStorage.key(i)}`)))
                 }
 
                 //para la grafica
